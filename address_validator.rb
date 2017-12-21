@@ -16,6 +16,11 @@ module AddressValidator
       FIELD_NAMES - normalized.keys
     end
 
+    def invalid_parts(object)
+      normalized = parse(object)
+      normalized.reject{|k, v| valid_part?(normalized[k])}.keys
+    end
+
     private
 
     def parse(object)
