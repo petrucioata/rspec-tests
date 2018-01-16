@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../address_validator'
+require 'address_validator'
 
 describe AddressValidator do
   let(:address) { { street: street, city: city } }
