@@ -3,7 +3,7 @@ require 'rspec'
 describe 'type matchers' do
   describe 'kind of' do
     # actual class
-    it { expect(7).to be_kind_of(Fixnum) }
+    it { expect(7).to be_kind_of(Integer) }
     it { expect("abcd").to be_a_kind_of(String) }
     it { expect(:a).to be_a(Symbol) }
 
@@ -16,7 +16,7 @@ describe 'type matchers' do
 
   describe 'instance of' do
     it { expect("abc").to be_instance_of(String) }
-    it { expect(777).to be_an_instance_of(Fixnum) }
+    it { expect(777).to be_an_instance_of(Integer) }
     it { expect(:z).to be_instance_of(Symbol) }
     it { expect(Array.new).to be_an_instance_of(Array) }
   end
