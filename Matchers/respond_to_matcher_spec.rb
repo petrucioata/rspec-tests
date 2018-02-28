@@ -1,4 +1,5 @@
 require 'rspec'
+require 'my_class'
 
 describe 'respond_to matcher' do
   context 'basic usage - a string and an array' do
@@ -32,5 +33,18 @@ describe 'respond_to matcher' do
     it { expect(Hash.new).to respond_to(:keys).with(0).arguments }
     it { expect(Hash.new).to respond_to(:has_value?).with(1).arguments }
     it { expect(Hash.new).not_to respond_to(:key).with(0).arguments }
+  end
+
+  context 'when the argument range is specified' do
+    # it { is_expected.to respond_to(:build).with(1..2).arguments }
+    it { is_expected.not_to respond_to(:build).with(0..1).arguments }
+    it { is_expected.not_to respond_to(:build).with(2..3).arguments }
+    it { is_expected.not_to respond_to(:build).with(0..3).arguments }
+
+    # deliberate failures
+    # it { is_expected.not_to respond_to(:build).with(1..2).arguments }
+    # it { is_expected.to respond_to(:build).with(0..1).arguments }
+    # it { is_expected.to respond_to(:build).with(2..3).arguments }
+    # it { is_expected.to respond_to(:build).with(0..3).arguments }
   end
 end
