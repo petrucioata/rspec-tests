@@ -36,10 +36,12 @@ describe 'respond_to matcher' do
   end
 
   context 'when the argument range is specified' do
-    # it { is_expected.to respond_to(:build).with(1..2).arguments }
-    it { is_expected.not_to respond_to(:build).with(0..1).arguments }
-    it { is_expected.not_to respond_to(:build).with(2..3).arguments }
-    it { is_expected.not_to respond_to(:build).with(0..3).arguments }
+    let(:my_class_object) { MyClass.new }
+
+    it { expect(my_class_object).to respond_to(:build).with(1..2).arguments }
+    it { expect(my_class_object).not_to respond_to(:build).with(0..1).arguments }
+    it { expect(my_class_object).not_to respond_to(:build).with(2..3).arguments }
+    it { expect(my_class_object).not_to respond_to(:build).with(0..3).arguments }
 
     # deliberate failures
     # it { is_expected.not_to respond_to(:build).with(1..2).arguments }
