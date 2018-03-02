@@ -2,6 +2,8 @@ require 'rspec'
 require 'my_class'
 
 describe 'respond_to matcher' do
+  let(:my_class_object) { MyClass.new }
+
   context 'basic usage - a string and an array' do
     let(:a_string) { "just a test" }
     let(:an_array) { %w(a b c d) }
@@ -36,8 +38,6 @@ describe 'respond_to matcher' do
   end
 
   context 'when the argument range is specified' do
-    let(:my_class_object) { MyClass.new }
-
     it { expect(my_class_object).to respond_to(:build).with(1..2).arguments }
     it { expect(my_class_object).not_to respond_to(:build).with(0..1).arguments }
     it { expect(my_class_object).not_to respond_to(:build).with(2..3).arguments }
@@ -48,5 +48,18 @@ describe 'respond_to matcher' do
     # it { is_expected.to respond_to(:build).with(0..1).arguments }
     # it { is_expected.to respond_to(:build).with(2..3).arguments }
     # it { is_expected.to respond_to(:build).with(0..3).arguments }
+  end
+
+  context 'when specify the unlimited arguments' do
+    it { expect(my_class_object).to respond_to(:greetings).with_unlimited_arguments }
+    it { expect(my_class_object).to respond_to(:greetings).with(1).argument.and_unlimited_arguments }
+    it { expect(my_class_object).not_to respond_to(:helooo).with_unlimited_arguments }
+    it { expect(my_class_object).not_to respond_to(:helooo).with(1).argument.and_unlimited_arguments }
+
+    # deliberate failures
+    # it { expect(my_class_object).not_to respond_to(:greetings).with_unlimited_arguments }
+    # it { expect(my_class_object).not_to respond_to(:greetings).with(1).argument.and_unlimited_arguments }
+    # it { expect(my_class_object).to respond_to(:helooo).with_unlimited_arguments }
+    # it { expect(my_class_object).to respond_to(:helooo).with(1).argument.and_unlimited_arguments }
   end
 end
