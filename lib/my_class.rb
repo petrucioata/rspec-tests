@@ -13,4 +13,8 @@ class MyClass
   def inspect
     'my_object'
   end
+
+  def find(name='id', limit: 1_000, offset: 0)
+    []
+  end
 end

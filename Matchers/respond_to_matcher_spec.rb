@@ -62,4 +62,15 @@ describe 'respond_to matcher' do
     # it { expect(my_class_object).to respond_to(:helooo).with_unlimited_arguments }
     # it { expect(my_class_object).to respond_to(:helooo).with(1).argument.and_unlimited_arguments }
   end
+
+  context 'when specify keywords' do
+    it { expect(my_class_object).to respond_to(:find).with_keywords(:limit, :offset) }
+    it { expect(my_class_object).to respond_to(:find).with_keywords(:limit) }
+    it { expect(my_class_object).to respond_to(:find).with(1).argument.and_keywords(:limit, :offset) }
+    it { expect(my_class_object).to respond_to(:find).with(1).argument.and_keywords(:offset) }
+
+    it { expect(my_class_object).not_to respond_to(:find).with_keywords(:limit, :extra_param) }
+    it { expect(my_class_object).not_to respond_to(:find).with(2).arguments.and_keywords(:offset) }
+    it { expect(my_class_object).not_to respond_to(:find).with(1).argument.and_keywords(:offset, :page) }
+  end
 end
