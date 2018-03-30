@@ -73,4 +73,19 @@ describe 'respond_to matcher' do
     it { expect(my_class_object).not_to respond_to(:find).with(2).arguments.and_keywords(:offset) }
     it { expect(my_class_object).not_to respond_to(:find).with(1).argument.and_keywords(:offset, :page) }
   end
+
+  context 'when specify any keywords' do
+    it { expect(my_class_object).to respond_to(:any_keywords).with_any_keywords }
+    it { expect(my_class_object).to respond_to(:any_keywords).with_keywords(:name).and_any_keywords }
+
+    it { expect(my_class_object).not_to respond_to(:greetings).with_any_keywords }
+    it { expect(my_class_object).not_to respond_to(:greetings).with_keywords(:message).and_any_keywords }
+  end
+
+  context 'when specify required keywords' do
+    it { expect(my_class_object).to respond_to(:required_keywords).with_keywords(:param) }
+    it { expect(my_class_object).to respond_to(:required_keywords).with_keywords(:param, :param_nil, :param_text) }
+
+    it { expect(my_class_object).not_to respond_to(:required_keywords).with_keywords(:param_text, :param_nil) }
+  end
 end
