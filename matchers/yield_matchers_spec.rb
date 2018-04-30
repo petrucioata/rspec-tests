@@ -31,4 +31,11 @@ describe 'yield matchers' do
     it { expect { |arg| YieldClass.yield_once_with('foo', 123, &arg) }.not_to yield_with_args(Integer, String) }
     it { expect { |arg| YieldClass.yield_once_with('foo', 123, &arg) }.not_to yield_with_args('foo', /23/) }
   end
+
+  describe 'yield_with_no_args matcher' do
+    it { expect { |arg| YieldClass.raw_yield(&arg) }.to yield_with_no_args }
+
+    it { expect { |arg| YieldClass.dont_yield(&arg) }.not_to yield_with_no_args }
+    it { expect { |arg| YieldClass.yield_once_with(12, &arg)}.not_to yield_with_no_args }
+  end
 end
